@@ -7,7 +7,6 @@ from selenium.webdriver.support import expected_conditions as EC
 import ait
 
 import pytest
-from time import sleep
 
 class TestBasicAuth:
     
