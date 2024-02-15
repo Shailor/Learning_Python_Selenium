@@ -15,13 +15,14 @@ password = "admin"
 def test_setup(driver,baseurl):
     url = baseurl + "basic_auth"
     driver.get(url)
-    yield url
+    yield {"url": url }
 
 def test_valid_credentials_in_url(driver,test_setup):
-    if test_setup[:7] == "http://":
-        url = test_setup[:7] + username + ":" + password + "@" + test_setup[7:]
-    elif test_setup[:8] == "https://":
-        url = test_setup[:8] + username + ":" + password + "@" + test_setup[8:]
+    url = test_setup.get("url")
+    if url[:7] == "http://":
+        url = url[:7] + username + ":" + password + "@" + url[7:]
+    elif url[:8] == "https://":
+        url = url[:8] + username + ":" + password + "@" + url[8:]
 
     driver.get(url)
     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "content")))
