@@ -18,9 +18,12 @@ def test_setup(driver,baseurl):
     yield url
 
 def test_valid_credentials_in_url(driver,test_setup):
-    url = test_setup[:7] + username + ":" + password + "@" + test_setup[7:]
+    if test_setup[:7] == "http://":
+        url = test_setup[:7] + username + ":" + password + "@" + test_setup[7:]
+    elif test_setup[:8] == "https://":
+        url = test_setup[:8] + username + ":" + password + "@" + test_setup[8:]
+
     driver.get(url)
-    print(url)
     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "content")))
     assert "Congratulations! You must have the proper credentials." in driver.page_source
     
