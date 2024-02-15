@@ -8,8 +8,8 @@ def baseurl():
     return "http://localhost:7080/"
 
 @pytest.fixture
-def driver_setup_teardown():
+def driver():
     browser = webdriver.Chrome()
-    browser.implicitly_wait(5)
+    browser.implicitly_wait(2)
     yield browser
     browser.close()

@@ -1,33 +1,29 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
+import pytest
 
-
-
-class TestCheckboxes:
-    def setup_method(self, method):
-        
-        self.browser = webdriver.Chrome()
-        self.browser.get("http://localhost:7080/checkboxes")
-        self.browser.implicitly_wait(5)
-        self.elements = self.browser.find_elements(By.XPATH, '//*[@id="checkboxes"]/input')
+@pytest.fixture(scope="function" ,autouse=True)
+def test_setup(driver, baseurl):
+    driver.get(baseurl + "checkboxes")
     
-    def teardown_method(self, method):
-        self.browser.close()
-        
-    def test_check_number_of_checkboxes(self):
-        assert len(self.elements) == 2
-        
-        
-    def test_check_checkbox1(self):
-        assert self.elements[0].is_selected() == False
-        self.elements[0].click()
-        assert self.elements[0].is_selected() == True
-        
-        
-    def test_uncheck_checkbox(self):
-        assert len(self.elements) == 2
-        assert self.elements[1].is_selected() == True
-        self.elements[1].click()
-        assert self.elements[1].is_selected() == False
-        
+
+def test_check_number_of_checkboxes(driver):
+    elements = driver.find_elements(By.XPATH, '//*[@id="checkboxes"]/input')
+    assert len(elements) == 2
+    
+    
+def test_check_checkbox1(driver):
+    elements = driver.find_elements(By.XPATH, '//*[@id="checkboxes"]/input')
+    assert elements[0].is_selected() == False
+    elements[0].click()
+    assert elements[0].is_selected() == True
+    
+    
+def test_uncheck_checkbox(driver):
+    elements = driver.find_elements(By.XPATH, '//*[@id="checkboxes"]/input')
+    assert len(elements) == 2
+    assert elements[1].is_selected() == True
+    elements[1].click()
+    assert elements[1].is_selected() == False
+    
