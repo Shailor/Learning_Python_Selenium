@@ -12,7 +12,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_enter_message_field(self):
         driver = self.driver
-        driver.get(r"D:\Programming\Python\Selenium\test\demo.seleniumeasy.com\basic-first-form-demo.html")
+        driver.get("https://demo.seleniumeasy.com/basic-first-form-demo.html")
 
         message_field = driver.find_element(By.ID, "user-message")
         message_field.send_keys("Hello World")
