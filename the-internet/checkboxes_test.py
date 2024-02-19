@@ -19,7 +19,7 @@ def test_check_checkbox1(driver):
     assert elements[0].is_selected() == True
     
     
-def test_uncheck_checkbox(driver):
+def test_uncheck_checkbox2(driver):
     elements = driver.find_elements(By.XPATH, '//*[@id="checkboxes"]/input')
     assert len(elements) == 2
     assert elements[1].is_selected() == True
