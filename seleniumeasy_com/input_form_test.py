@@ -8,6 +8,10 @@ from selenium.webdriver.chrome.options import Options
 class MyTestCase(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
+        
+    
+    def tearDown(self):
+        self.driver.close()
 
 
     def test_enter_message_field(self):
@@ -23,8 +27,6 @@ class MyTestCase(unittest.TestCase):
         # user_message_field = driver.find_elements(By., 'Hello World')
         self.assertTrue("Hello World" in driver.page_source)
 
-    def tearDown(self):
-        self.driver.close()
 
 if __name__ == '__main__':
     unittest.main()
