@@ -3,6 +3,9 @@ import pytest
 from conftest import login
 
 def test_login_wiht_incorrect_info(driver, login_info):
+    
+    assert 'Automation Exercise' in driver.title
+    
     incorrect_login_data = {'email': 'wrong@email.com', "password": "wrong_password"}
     
     login(driver, incorrect_login_data)

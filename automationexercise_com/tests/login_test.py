@@ -7,6 +7,8 @@ from selenium.webdriver.common.keys import Keys
 from conftest import login, delete_user, close_ads
 
 def test_login(driver, login_info):
+    assert 'Automation Exercise' in driver.title
+    
     login(driver, login_info)
     assert "Logged in as " + login_info.get('name') in driver.find_element(By.XPATH, '//*[@id="header"]/div/div/div/div[2]/div/ul/li[10]/a').text
     
