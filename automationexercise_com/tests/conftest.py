@@ -46,7 +46,7 @@ def register(driver, login_info):
     # Get to login page
     driver.find_element(By.XPATH, '//*[@id="header"]/div/div/div/div[2]/div/ul/li[4]/a').click()
     
-    assert driver.find_element(By.XPATH, '//*[@id="form"]/div/div/div[3]/div/h2').text == 'New User Signup!'
+    assert driver.current_url == 'https://automationexercise.com/login'
     
     # Enter name
     driver.find_element(By.XPATH, '//*[@id="form"]/div/div/div[3]/div/form/input[2]').send_keys(login_info.get('name'))
@@ -101,7 +101,7 @@ def login(driver, login_info):
     
     # get to login page
     driver.find_element(By.XPATH, '//*[@id="header"]/div/div/div/div[2]/div/ul/li[4]/a').click()
-    assert driver.find_element(By.XPATH, '//*[@id="form"]/div/div/div[3]/div/h2').text == 'New User Signup!'
+    assert driver.current_url == 'https://automationexercise.com/login'
     
     # enter email
     driver.find_element(By.XPATH, '//*[@id="form"]/div/div/div[1]/div/form/input[2]').send_keys(login_info.get('email'))
@@ -131,3 +131,8 @@ def close_ads(driver):
     const elements = document.getElementsByClassName("adsbygoogle adsbygoogle-noablate");
     while (elements.length > 0) elements[0].remove();
                         """)
+    
+    
+def get_price_number(WebElement):
+    for i in range(len(WebElement)):
+        WebElement[i] = (int(re.findall(r'\d+', WebElement[i].text)[0]))
